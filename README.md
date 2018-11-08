@@ -24,3 +24,7 @@ To build a command interpreter that can:
 
 # Repo hierarchy
 Import output from tree when close to deadline
+
+# Author
+Hemant Heer
+Heindrick Cheung
