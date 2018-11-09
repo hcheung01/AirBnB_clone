@@ -1,6 +1,4 @@
 #!/usr/bin/python3
-<<<<<<< HEAD
-=======
 """ Contains the HBNBCommand class """
 import cmd
 
@@ -32,4 +30,3 @@ class HBNBCommand(cmd.Cmd):
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
->>>>>>> 570e7508c8b03fa8d6b408121cce6bcaf6ec923a
