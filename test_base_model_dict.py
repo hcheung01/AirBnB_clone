@@ -22,3 +22,7 @@ print(type(my_new_model.created_at))
 
 print("--")
 print(my_model is my_new_model)
+
+print("--------")
+print("this is the dictionary attributes")
+print(my_model.__dict__)
