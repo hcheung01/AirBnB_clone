@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-<<<<<<< HEAD
 """
 class module
 """
@@ -13,10 +12,14 @@ class BaseModel():
         """Initialization Method"""
         if kwargs:
             for key, val in kwargs.items():
-                if key == 'create_at' or key == 'updated_at':
-                    dt_time_obj = datetime.strftime(val, '%Y, %-m, %-d', )
-                setattr(self, key, val)
-
+                if key == 'created_at' or key == 'updated_at':
+                    # convert datetime str in dict to datetime object
+                    dt_time_obj = datetime.strptime(val, '%Y-%m-%dT%H:%M:%S.%f')
+                    setattr(self, key, dt_time_obj)
+                elif key == '__class__':
+                    self.key = val
+                else:
+                    setattr(self, key, val)
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
@@ -39,29 +42,3 @@ class BaseModel():
         dict2['created_at'] = self.created_at.isoformat()
         dict2['updated_at'] = self.updated_at.isoformat()
         return dict2
-=======
-""" Contains the base model class """
-
-
-import uuid
-import datetime
-
-
-class BaseModel:
-    """ Contains common attributes and methods child classes will use """
-
-    def __init__(self):
-        """ method called when an instance of the class is created
-        """
-
-        self.id = str(uuid.uuid4())
-
-    def __str__(self):
-        """ prints a  user representation of an instane of the class """
-        return("[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__))
-
-
-if __name__ == '__main__':
-    a = BaseModel()
-    print(a)
->>>>>>> 570e7508c8b03fa8d6b408121cce6bcaf6ec923a
