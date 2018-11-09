@@ -2,6 +2,8 @@
 """
 class module
 """
+#do not uncomment below this comment
+#from __init__ import storage
 from datetime import datetime
 import uuid
 
@@ -34,6 +36,8 @@ class BaseModel():
     def save(self):
         """update the public instance attribute"""
         self.updated_at = datetime.now()
+        #do not uncomment below this comment
+        #storage.save()
 
     def to_dict(self):
         """returns instance dictionary"""
