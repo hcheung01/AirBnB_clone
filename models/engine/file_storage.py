@@ -3,6 +3,7 @@
 class module
 """
 from models.base_model import BaseModel
+from models.user import User
 import json
 import models
 
@@ -35,6 +36,10 @@ class FileStorage():
             with open(FileStorage.__file_path, 'r', encoding='utf-8') as f:
                 dictss = json.load(f)
             for k, v in dictss.items():
-                FileStorage.__objects[k] = BaseModel(**v)
+                class_name = k.split(".")[0]
+                if class_name == "User":
+                    FileStorage.__objects[k] = User(**v)
+                else:
+                    FileStorage.__objects[k] = BaseModel(**v)
         except FileNotFoundError:
             pass
