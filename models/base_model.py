@@ -18,7 +18,7 @@ class BaseModel():
                     dt_time_obj = datetime.strptime(val, '%Y-%m-%dT%H:%M:%S.%f')
                     setattr(self, key, dt_time_obj)
                 elif key == '__class__':
-                    self.key = val
+                    pass
                 else:
                     setattr(self, key, val)
         else:
@@ -38,7 +38,7 @@ class BaseModel():
 
     def to_dict(self):
         """returns instance dictionary"""
-        dict2 = dict(**self.__dict__)
+        dict2 = dict(self.__dict__)
         dict2['__class__'] = self.__class__.__name__
         dict2['created_at'] = self.created_at.isoformat()
         dict2['updated_at'] = self.updated_at.isoformat()
