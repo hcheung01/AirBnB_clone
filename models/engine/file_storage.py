@@ -24,12 +24,16 @@ class FileStorage():
 
     def save(self):
         """serializes objects in dictionary"""
-        dicts = {}
-        for obj_id, obj in self.__objects.items():
+        new_dict = {}
+        for obj_id, obj in FileStorage.__objects.items():
             #call to_dic method in each object to return str dict
-            dicts[obj_id] = obj.to_dict()
-        with open(self.__file_path, "w") as f:
-            json.dump(dicts, f)
+            new_dict[obj_id] = obj.to_dict()
+        with open(FileStorage.__file_path, "w") as f:
+            json.dump(new_dict, f)
 
     def reload(self):
         """deserializes the JSON file in dictionary"""
+        with open(FileStorage.__file_path, 'r', encoding='utf-8') as f:
+            dictss = json.load(f)
+            for k, v in FileStorage.__objects.items():
+                FileStorage.__objects[k] = v
