@@ -4,14 +4,19 @@ import cmd
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 from models.user import User
-from sys import argv
 from models import storage
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     """ Simple console for AirBnb """
 
     prompt = '(hbnb) '
-    __cls_list = ["BaseModel", "User"]
+    __cls_list = ["BaseModel", "User", "Place", "State",
+                  "City", "Amenity", "Review"]
 
     def do_quit(self, line):
         """ Stops the command loop
@@ -42,7 +47,9 @@ class HBNBCommand(cmd.Cmd):
         if not len(args):
             print("** class name missing **")
         else:
-            dictss = {"BaseModel": BaseModel, "User": User}
+            dictss = {"BaseModel": BaseModel, "User": User, "Place": Place,
+                      "State": State, "City": City, "Amenity": Amenity,
+                      "Review": Review}
             if args[0] in dictss.keys():
                 new = dictss[args[0]]()
                 new.save()
