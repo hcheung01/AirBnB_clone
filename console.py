@@ -68,23 +68,50 @@ class HBNBCommand(cmd.Cmd):
         args = args.split()
         if not len(args):
             print("** class name missing **")
+        elif len(args) < 2:
+            print("** instance id missing **")
+        elif args[0] not in self.__cls_list:
+            print("** class doesn't exist **")
+        else:
+            name = args[0] + "." + args[1]
+            all_objs = storage.all()
+            if name not in all_objs:
+                print("** no instance found **")
+            else:
+                all_objs.pop(name)
+                storage.save()
+
+    def do_all(self, args):
+        args = args.split()
+        __n_list = []
+        all_objs = storage.all()
+        for v in all_objs.values():
+            __n_list.append(str(v))
+        if len(args) and args[0] not in self.__cls_list or not len(__n_list):
+            print("** class doesn't exist **")
+        else:
+            print(__n_list)
+
+    def do_update(self, args):
+        args = args.split()
+        if not len(args):
+            print("** class name missing **")
         elif args[0] not in self.__cls_list:
             print("** class doesn't exist **")
         elif len(args) < 2:
             print("** instance id missing **")
+        elif len(args) < 3:
+            print("** attribute name missing **")
+        elif len(args) < 4:
+            print("** value missing **")
         else:
             name = args[0] + "." + args[1]
             all_objs = storage.all()
-            all_objs.pop(name)
-            storage.save()
-
-    def do_all(self, args):
-        n_list = []
-        args = args.split()
-        all_objs = storage.all()
-        for v in all_objs.values():
-            n_list.append(str(v))
-        print(n_list)
+            if name not in all_objs:
+                print("** no instance found **")
+            else:
+                setattr(all_objs[name], args[2], args[3])
+                storage.save()
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
