@@ -111,14 +111,14 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
             else:
                 ban_attr = ["id", "create_at", "updated_at"]
-                attr_type = [str, int, float]
-                if hasattr(all_objs[name], args[2]):
-                    get_type = type(all_objs[name].)
-                    setattr(all_objs[name], args[2], get_type(args[3]))
-                    storage.save()
-                elif args[2] not in ban_attr:
-                    setattr(all_objs[name], args[2], args[3])
-                    storage.save()
+                if args[2] not in ban_attr:
+                    if hasattr(all_objs[name], args[2]):
+                        get_type = type(getattr(all_objs[name], args[2]))
+                        setattr(all_objs[name], args[2], get_type(args[3]))
+                        storage.save()
+                    else:
+                        setattr(all_objs[name], args[2], args[3])
+                        storage.save()
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
