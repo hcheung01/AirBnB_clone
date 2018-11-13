@@ -11,6 +11,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 
+
 class HBNBCommand(cmd.Cmd):
     """ Simple console for AirBnb """
 
@@ -103,36 +104,60 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, args):
         args = args.split()
-        if not len(args):
-            print("** class name missing **")
-        elif args[0] not in self.__cls_list:
-            print("** class doesn't exist **")
-        elif len(args) < 2:
-            print("** instance id missing **")
-        elif len(args) < 3:
-            print("** attribute name missing **")
-        elif len(args) < 4:
-            print("** value missing **")
-        else:
-            name = args[0] + "." + args[1]
-            all_objs = storage.all()
-            if name not in all_objs:
-                print("** no instance found **")
+        all_objs = storage.all()
+
+        error = 0
+        for i in range(4):
+            try:
+                args[i]
+            except:
+                if error == 0:
+                    print("** class name missing **")
+                elif error == 1:
+                    print("** instance id missing **")
+                elif error == 2:
+                    print("** attribute name missing **")
+                else:
+                    print("** value missing **")
+                break
+            if i == 0:
+                if args[i] not in self.__cls_list:
+                    print("** class doesn't exist **")
+                    break
+            elif i == 1:
+                name = args[0] + "." + args[1]
+                if name not in all_objs.keys():
+                    print("** no instance found **")
+                    break
+            elif i == 2:
+                pass
             else:
                 ban_attr = ["id", "create_at", "updated_at"]
                 if args[2] not in ban_attr:
                     if hasattr(all_objs[name], args[2]):
                         get_type = type(getattr(all_objs[name], args[2]))
-                        setattr(all_objs[name], args[2], get_type(args[3]))
-                        storage.save()
-                    else:
-                        if hasattr(all_objs[name], args[2]):
-                            setattr(all_objs[name], args[2], args[3])
+                        try:
+                            args[3] = get_type(args[3])
+                            setattr(all_objs[name], args[2], get_type(args[3]))
                             storage.save()
+                        except:
+                            pass
+            if i < 3:
+                error += 1
 
-    def do_obj(self, args):
-        args = args.split(".")
-        print(args)
+    def default(self, text):
+        text_maps = {
+            'User.all()': 'User',
+            'BaseModel.all()': 'BaseModel',
+            'State.all()': 'State',
+            'City.all()': 'City',
+            'Amenity.all()': 'Amenity',
+            'Place.all()': 'Place',
+            'Review.all()': 'Review'
+        }
+        if text in text_maps.keys():
+            return self.do_all(text_maps[text])
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
