@@ -83,8 +83,6 @@ class FileStorage():
             for k, v in dictss.items():
                 class_name = k.split(".")[0]
                 if class_name in FileStorage.__cls_name:
-                    FileStorage.__objects[k] =
-                    FileStorage.__cls_name[class_name](**v)
-
+                    self.__objects[k] = self.__cls_name[class_name](**v)
         except FileNotFoundError:
             pass
