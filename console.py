@@ -91,7 +91,7 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, args):
         args = args.split()
         all_objs = storage.all()
-        if len(args) and args[0] not in self.__cls_list:
+        if len(args) and args[0] not in self.__cls_list or not all_objs:
             print("** class doesn't exist **")
         elif len(args) and args[0] in self.__cls_list:
             __list = [str(v) for k, v in all_objs.items()
