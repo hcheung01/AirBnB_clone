@@ -6,7 +6,7 @@ from models.base_model import BaseModel
 
 
 class City(BaseModel):
-    """Class for city type instances"""
+    """Class City which inherits from Base class"""
 
     state_id = ""
     name = ""

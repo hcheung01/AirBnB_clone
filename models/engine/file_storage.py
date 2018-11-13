@@ -12,6 +12,7 @@ from models.review import Review
 import json
 import models
 
+
 class FileStorage():
     """class for serialization"""
 
@@ -22,16 +23,43 @@ class FileStorage():
                   "Review": Review}
 
     def all(self):
-        """returns the dictionary __objects"""
+        """returns the dictionary __objects
+
+        Args:
+            na
+        Description:
+            show all instances
+        Return:
+            na
+        """
+
         return self.__objects
 
     def new(self, obj):
-        """sets objs in objs dictionary"""
+        """sets objs in objs dictionary
+
+        Args:
+            obj: object input
+        Description:
+            create key and store object for value
+        Return:
+            na
+        """
+
         key = "{}.{}".format(obj.__class__.__name__, obj.id)
         FileStorage.__objects[key] = obj
 
     def save(self):
-        """serializes objects in dictionary"""
+        """save method
+
+        Args:
+            na
+        Description:
+            serializes objects in dictionary
+        Return:
+            na
+        """
+
         new_dict = {}
         for obj_id, obj in FileStorage.__objects.items():
             new_dict[obj_id] = obj.to_dict()
@@ -39,18 +67,24 @@ class FileStorage():
             json.dump(new_dict, f)
 
     def reload(self):
-        """deserializes the JSON file in dictionary"""
+        """reload method
+
+        Args:
+            na
+        Description:
+            deserializes the JSON file in dictionary
+        Return:
+            na
+        """
+
         try:
             with open(FileStorage.__file_path, 'r', encoding='utf-8') as f:
                 dictss = json.load(f)
             for k, v in dictss.items():
                 class_name = k.split(".")[0]
-                #if class_name == "User":
-                #    FileStorage.__objects[k] = User(**v)
-                #else:
-                #    FileStorage.__objects[k] = BaseModel(**v)
                 if class_name in FileStorage.__cls_name:
-                    FileStorage.__objects[k] = FileStorage.__cls_name[class_name](**v)
+                    FileStorage.__objects[k] =
+                    FileStorage.__cls_name[class_name](**v)
 
         except FileNotFoundError:
             pass
