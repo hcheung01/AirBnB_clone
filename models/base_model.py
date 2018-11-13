@@ -25,7 +25,8 @@ class BaseModel():
         if kwargs:
             for key, val in kwargs.items():
                 if key == 'created_at' or key == 'updated_at':
-                    dt_time_obj = datetime.strptime(val, '%Y-%m-%dT%H:%M:%S.%f')
+                    dt_time_obj = datetime.strptime(val,
+                                                    '%Y-%m-%dT%H:%M:%S.%f')
                     setattr(self, key, dt_time_obj)
                 elif key == '__class__':
                     pass
@@ -48,7 +49,8 @@ class BaseModel():
             na
         """
 
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(self.__class__.__name__,
+                                     self.id, self.__dict__)
 
     def save(self):
         """update the public instance attribute
