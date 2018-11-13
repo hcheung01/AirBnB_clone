@@ -155,7 +155,21 @@ class TestBaseModel(unittest.TestCase):
 
         self.assertIsNot(self.old, self.new_model)
 
-    def test_dunder_str(self):
+    def test_same_ids_different_instances(self):
+        """
+        If a new instance is created from the dictionary of a previous
+        instance, the new instance's attributes should be the same.
+        The previous test verifies if the two instances are unique.
+        """
+        self.assertEqual(self.old.id, self.new_model.id)
+        self.assertEqual(
+                self.old.created_at.__str__(),
+                self.new_model.created_at.__str__())
+        self.assertEqual(
+                self.old.updated_at.__str__(),
+                self.new_model.updated_at.__str__())
+
+    def test_output_str(self):
         """ Tests if the output from print is a str
 
             Args:
@@ -164,3 +178,26 @@ class TestBaseModel(unittest.TestCase):
         """
 
         self.assertIsInstance(self.a.__str__(), str)
+
+    def test_if_updated_at_changed(self):
+        """
+        Tests if the public instance attribute "updated_at"
+        changed once the save method of the instance is called
+
+        Args:
+            the instance itself is passed
+        """
+        old_updated_at = self.a.updated_at.__str__()
+        self.a.save()
+        new_updated_at = self.a.updated_at.__str__()
+
+        self.assertNotEqual(old_updated_at, new_updated_at)
+
+    def test_dunder_string(self):
+        self.new = BaseModel()
+        correct_output_str = "[{}] ({}) {}".format(
+                self.new.__class__.__name__,
+                self.new.id,
+                self.new.__dict__)
+
+        self.assertEqual(correct_output_str, self.new.__str__())
