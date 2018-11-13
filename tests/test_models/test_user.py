@@ -95,14 +95,3 @@ class TestUser(unittest.TestCase):
         self.assertIsInstance(self.a.last_name, str)
         self.assertIsInstance(self.b.last_name, str)
         self.assertEqual(self.b.last_name, "")
-
-    def test_storage(self):
-        """Setup Method
-
-        Args:
-            na
-        Description:
-            test string id of instance
-        Return:
-            na
-        """
