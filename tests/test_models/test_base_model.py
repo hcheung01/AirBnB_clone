@@ -193,3 +193,11 @@ class TestBaseModel(unittest.TestCase):
 
         self.assertNotEqual(old_updated_at, new_updated_at)
 
+    def test_dunder_string(self):
+        self.new = BaseModel()
+        correct_output_str = "[{}] ({}) {}".format(
+                self.new.__class__.__name__,
+                self.new.id,
+                self.new.__dict__)
+
+        self.assertEqual(correct_output_str, self.new.__str__())
