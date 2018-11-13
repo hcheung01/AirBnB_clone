@@ -154,3 +154,13 @@ class TestBaseModel(unittest.TestCase):
         """
 
         self.assertIsNot(self.old, self.new_model)
+
+    def test_dunder_str(self):
+        """ Tests if the output from print is a str
+
+            Args:
+                the instance
+
+        """
+
+        self.assertIsInstance(self.a.__str__(), str)
