@@ -154,20 +154,3 @@ class TestBaseModel(unittest.TestCase):
         """
 
         self.assertIsNot(self.old, self.new_model)
-
-    @unittest.skip('wip')
-    def test_instance_creation_add_to_storage_dict(self):
-        """Test Method
-
-        Args:
-            na
-        Description:
-            test if new instance is added to dictionary storage
-        Return:
-            na
-        """
-
-        self.test = BaseModel()
-        self.test.save()
-        key = '{}.{}'.format(type(self.test).__name__, self.test.id)
-        self.assertTrue(getattr(storage.all(), key))
