@@ -126,8 +126,13 @@ class HBNBCommand(cmd.Cmd):
                         setattr(all_objs[name], args[2], get_type(args[3]))
                         storage.save()
                     else:
-                        setattr(all_objs[name], args[2], args[3])
-                        storage.save()
+                        if hasattr(all_objs[name], args[2]):
+                            setattr(all_objs[name], args[2], args[3])
+                            storage.save()
+
+    def do_obj(self, args):
+        args = args.split(".")
+        print(args)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
