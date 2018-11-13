@@ -41,7 +41,6 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         pass
 
-    # 7
     def do_create(self, args):
         args = args.split()
         if not len(args):
@@ -91,14 +90,16 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, args):
         args = args.split()
-        __n_list = []
         all_objs = storage.all()
-        for v in all_objs.values():
-            __n_list.append(str(v))
-        if len(args) and args[0] not in self.__cls_list or not len(__n_list):
+        if len(args) and args[0] not in self.__cls_list:
             print("** class doesn't exist **")
+        elif len(args) and args[0] in self.__cls_list:
+            __list = [str(v) for k, v in all_objs.items()
+                      if k.split(".")[0] == args[0]]
+            print(__list)
         else:
-            print(__n_list)
+            __list = [str(v) for v in all_objs.values()]
+            print(__list)
 
     def do_update(self, args):
         args = args.split()
