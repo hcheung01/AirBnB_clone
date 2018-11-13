@@ -213,7 +213,7 @@ class HBNBCommand(cmd.Cmd):
                         get_type = type(getattr(all_objs[name], args[2]))
                         try:
                             args[3] = get_type(args[3])
-                            setattr(all_objs[name], args[2], get_type(args[3]))
+                            setattr(all_objs[name], args[2], get_type(args[3].strip('"')))
                             storage.save()
                         except:
                             pass
