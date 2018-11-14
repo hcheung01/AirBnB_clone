@@ -12,6 +12,9 @@ class TestFileStorage(unittest.TestCase):
     """ Defines the unit tests for file_storage """
 
     def setUp(self):
+        """
+        setUp function that runs before every test
+        """
         self.storage = FileStorage()
         self.storage.reload()
         self.name_mapping = {
@@ -19,6 +22,9 @@ class TestFileStorage(unittest.TestCase):
         }
 
     def tearDown(self):
+        """
+        runs after every test method
+        """
         all_objs = self.storage.all()
         all_objs.clear()
         self.storage.save()
@@ -103,3 +109,12 @@ class TestFileStorage(unittest.TestCase):
         self.all_objs = self.storage.all()
 
         self.assertIsInstance(self.all_objs[self.key], BaseModel)
+
+    def test_new_method(self):
+        """
+        Tests if the new method is adding instances to the storage dictionary
+        """
+
+        self.a = BaseModel()
+        self.key = 'BaseModel.{}'.format(self.a.id)
+        self.assertIn(self.key, self.storage.all())
