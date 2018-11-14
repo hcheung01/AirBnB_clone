@@ -24,8 +24,25 @@ class TestReview(unittest.TestCase):
         self.a.place_id = "1000"
         self.a.user_id = "1000"
         self.a.text = "1000"
-
         self.b = Review()
+
+    def teardown(self):
+        """teardown method
+
+        Args:
+            na
+        Description:
+            remove testing instances and delete file.json file
+        Return:
+            na
+        """
+
+        del self.a
+        del self.b
+        try:
+            os.remove(file.json)
+        except FileNotFoundError:
+            pass
 
     def test_instance(self):
         """test method
@@ -113,3 +130,6 @@ class TestReview(unittest.TestCase):
         """
 
         self.assertTrue(issubclass(Review, BaseModel))
+
+if __name__ == "__main__":
+    unittest.main()

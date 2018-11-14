@@ -35,6 +35,24 @@ class TestPlace(unittest.TestCase):
         self.a.amenity_ids = ["one", "two", "three"]
         self.b = Place()
 
+    def teardown(self):
+        """teardown method
+
+        Args:
+            na
+        Description:
+            remove testing instances and delete file.json file
+        Return:
+            na
+        """
+
+        del self.a
+        del self.b
+        try:
+            os.remove(file.json)
+        except FileNotFoundError:
+            pass
+
     def test_instance(self):
         """test method
 
@@ -187,3 +205,6 @@ class TestPlace(unittest.TestCase):
         """
 
         self.assertTrue(issubclass(Place, BaseModel))
+
+if __name__ == "__main__":
+    unittest.main()

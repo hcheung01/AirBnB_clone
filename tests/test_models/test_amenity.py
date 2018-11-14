@@ -5,6 +5,7 @@ Test Module
 from models.base_model import BaseModel
 from models.amenity import Amenity
 import unittest
+import os
 
 
 class TestAmenity(unittest.TestCase):
@@ -23,8 +24,25 @@ class TestAmenity(unittest.TestCase):
 
         self.a = Amenity()
         self.a.name = "Hemant"
-
         self.b = Amenity()
+
+    def teardown(self):
+        """teardown method
+
+        Args:
+            na
+        Description:
+            remove testing instances and delete file.json file
+        Return:
+            na
+        """
+
+        del self.a
+        del self.b
+        try:
+            os.remove(file.json)
+        except FileNotFoundError:
+            pass
 
     def test_instance(self):
         """test method
@@ -109,3 +127,6 @@ class TestAmenity(unittest.TestCase):
         """
 
         self.assertTrue(issubclass(Amenity, BaseModel))
+
+if __name__ == "__main__":
+    unittest.main()

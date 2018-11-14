@@ -32,6 +32,24 @@ class TestUser(unittest.TestCase):
 
         self.b = User()
 
+    def teardown(self):
+        """teardown method
+
+        Args:
+            na
+        Description:
+            remove testing instances and delete file.json file
+        Return:
+            na
+        """
+
+        del self.a
+        del self.b
+        try:
+            os.remove(file.json)
+        except FileNotFoundError:
+            pass
+
     def test_email(self):
         """Setup Method
 
@@ -95,3 +113,6 @@ class TestUser(unittest.TestCase):
         self.assertIsInstance(self.a.last_name, str)
         self.assertIsInstance(self.b.last_name, str)
         self.assertEqual(self.b.last_name, "")
+
+if __name__ == "__main__":
+    unittest.main()

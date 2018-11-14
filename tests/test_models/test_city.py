@@ -28,6 +28,24 @@ class TestCity(unittest.TestCase):
 
         self.b = City()
 
+    def teardown(self):
+        """teardown method
+
+        Args:
+            na
+        Description:
+            remove testing instances and delete file.json file
+        Return:
+            na
+        """
+
+        del self.a
+        del self.b
+        try:
+            os.remove(file.json)
+        except FileNotFoundError:
+            pass
+
     def test_instance(self):
         """test method
         Args:
@@ -106,3 +124,6 @@ class TestCity(unittest.TestCase):
         """
 
         self.assertTrue(issubclass(City, BaseModel))
+
+if __name__ == "__main__":
+    unittest.main()
