@@ -40,11 +40,6 @@ class TestAmenity(unittest.TestCase):
 
         del self.a
         del self.b
-#        myfile = "/home/vagrant/AirBnB_clone/file.json"
-#        try:
-#            os.remove(myfile)
-#        except FileNotFoundError:
-#            pass
 
     def test_pep8_conformance(self):
         """Test that we conform to PEP8"""
@@ -141,6 +136,7 @@ class TestAmenity(unittest.TestCase):
         """test if inherit from basemodel and save to json"""
 
         self.a.save()
+        self.b.save()
         myfile = "/home/vagrant/AirBnB_clone/file.json"
         self.assertTrue(os.path.isfile(myfile))
 
@@ -150,6 +146,12 @@ class TestAmenity(unittest.TestCase):
             self.assertFalse(os.path.isfile(myfile))
         except FileNotFoundError:
             pass
+
+    def test_file_exist(self):
+        """test if file exist after delete"""
+
+        myfile = "/home/vagrant/AirBnB_clone/file.json"
+        self.assertFalse(os.path.isfile(myfile))
 
 if __name__ == "__main__":
     unittest.main()

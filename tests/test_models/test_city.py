@@ -27,7 +27,6 @@ class TestCity(unittest.TestCase):
         self.a = City()
         self.a.state_id = "1000Holberton"
         self.a.name = "Hemant"
-
         self.b = City()
 
     def teardown(self):
@@ -43,10 +42,6 @@ class TestCity(unittest.TestCase):
 
         del self.a
         del self.b
-        try:
-            os.remove("file.json")
-        except FileNotFoundError:
-            pass
 
     def test_pep8_conformance(self):
         """Test that we conform to PEP8"""
@@ -133,6 +128,21 @@ class TestCity(unittest.TestCase):
         """
 
         self.assertTrue(issubclass(City, BaseModel))
+
+    def test_save_json(self):
+        """test save inherited from basemodel and json file"""
+
+        self.a.save()
+        self.b.save()
+        myfile = "/home/vagrant/AirBnB_clone/file.json"
+        self.assertTrue(os.path.isfile(myfile))
+
+        try:
+            os.path.isfile(myfile)
+            os.remove(myfile)
+            self.assertFalse(os.path.isfile(myfile))
+        except FileNotFoundError:
+            pass
 
 if __name__ == "__main__":
     unittest.main()

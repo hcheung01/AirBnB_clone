@@ -50,10 +50,6 @@ class TestPlace(unittest.TestCase):
 
         del self.a
         del self.b
-        try:
-            os.remove("file.json")
-        except FileNotFoundError:
-            pass
 
     def test_pep8_conformance(self):
         """Test that we conform to PEP8"""
@@ -214,6 +210,21 @@ class TestPlace(unittest.TestCase):
         """
 
         self.assertTrue(issubclass(Place, BaseModel))
+
+    def test_save_json(self):
+        """test if inherit from basemodel and save to json"""
+
+        self.a.save()
+        self.b.save()
+        myfile = "/home/vagrant/AirBnB_clone/file.json"
+        self.assertTrue(os.path.isfile(myfile))
+
+        try:
+            os.path.isfile(myfile)
+            os.remove(myfile)
+            self.assertFalse(os.path.isfile(myfile))
+        except FileNotFoundError:
+            pass
 
 if __name__ == "__main__":
     unittest.main()
