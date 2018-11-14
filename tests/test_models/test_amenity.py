@@ -139,6 +139,3 @@ class TestAmenity(unittest.TestCase):
         myfile = "/home/vagrant/AirBnB_clone/file.json"
         self.assertFalse(os.path.isfile(myfile))
         print(self.a.__init__)
-
-if __name__ == "__main__":
-    unittest.main()
