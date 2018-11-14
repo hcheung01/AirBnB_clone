@@ -2,7 +2,7 @@
 """
 Contains the HBNBCommand class
 """
-import cmd, shlex
+import cmd
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 from models.user import User
@@ -213,11 +213,14 @@ class HBNBCommand(cmd.Cmd):
                         get_type = type(getattr(all_objs[name], args[2]))
                         try:
                             args[3] = get_type(args[3])
-                            setattr(all_objs[name], args[2], get_type(args[3].strip('"')))
+                            args[3] = args[3].strip("'")
+                            setattr(all_objs[name], args[2],
+                                    get_type(args[3].strip('"')))
                             storage.save()
                         except:
                             pass
                     else:
+                        args[3] = args[3].strip("'")
                         setattr(all_objs[name], args[2], args[3].strip('"'))
                         storage.save()
             if i < 3:
