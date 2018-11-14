@@ -68,6 +68,8 @@ class HBNBCommand(cmd.Cmd):
 
         pass
 
+    def help_create(self):
+        print("""Creates a new instance of <class-name>
     def do_create(self, args):
         """create instance method
 
@@ -176,21 +178,40 @@ class HBNBCommand(cmd.Cmd):
             args: cmdline input
         Description:
             show all instances
+        Usage:
+            all --Shows everything in the json file
+            all <Class Name> -- Shows only certain instances
         Return:
             na
         """
-
         args = args.split()
         all_objs = storage.all()
-        if len(args) and args[0] not in self.__cls_list or not all_objs:
-            print("** class doesn't exist **")
-        elif len(args) and args[0] in self.__cls_list:
-            __list = [str(v) for k, v in all_objs.items()
-                      if k.split(".")[0] == args[0]]
-            print(__list)
-        else:
-            __list = [str(v) for v in all_objs.values()]
-            print(__list)
+        error = 0
+        for i in range(2):
+            try:
+                args[i]
+            except:
+                if error == 0:
+                    if len(all_objs) == 0:
+                        break
+                    else:
+                        print([str(v) for v in all_objs.values()])
+                        break
+            if i == 0:
+                if args[i] not in self.__cls_list:
+                    print("** class doesn't exist **")
+                    break
+                else:
+                    inst_list = []
+                    [inst_list.append(v) for k, v in all_objs.items()
+                        if k.split(".")[0] == args[0]]
+                    if len(inst_list) == 0:
+                        break
+                    else:
+                        print([str(item) for item in inst_list])
+                        break
+
+            error += 1
 
     def do_update(self, args):
         """Update Method
