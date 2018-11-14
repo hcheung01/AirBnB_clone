@@ -27,20 +27,6 @@ class TestAmenity(unittest.TestCase):
         self.a.name = "Hemant"
         self.b = Amenity()
 
-    def teardown(self):
-        """teardown method
-
-        Args:
-            na
-        Description:
-            remove testing instances and delete file.json file
-        Return:
-            na
-        """
-
-        del self.a
-        del self.b
-
     def test_pep8_conformance(self):
         """Test that we conform to PEP8"""
 
@@ -152,6 +138,7 @@ class TestAmenity(unittest.TestCase):
 
         myfile = "/home/vagrant/AirBnB_clone/file.json"
         self.assertFalse(os.path.isfile(myfile))
+        print(self.a.__init__)
 
 if __name__ == "__main__":
     unittest.main()
