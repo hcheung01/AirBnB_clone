@@ -126,16 +126,3 @@ class TestAmenity(unittest.TestCase):
         myfile = "/home/vagrant/AirBnB_clone/file.json"
         self.assertTrue(os.path.isfile(myfile))
 
-        try:
-            os.path.isfile(myfile)
-            os.remove(myfile)
-            self.assertFalse(os.path.isfile(myfile))
-        except FileNotFoundError:
-            pass
-
-    def test_file_exist(self):
-        """test if file exist after delete"""
-
-        myfile = "/home/vagrant/AirBnB_clone/file.json"
-        self.assertFalse(os.path.isfile(myfile))
-        print(self.a.__init__)
