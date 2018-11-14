@@ -2,6 +2,7 @@
 """
 Test Module
 """
+from models.base_model import BaseModel
 from models.place import Place
 import unittest
 
@@ -32,7 +33,6 @@ class TestPlace(unittest.TestCase):
         self.a.latitude = 11.5
         self.a.longitude = 8.5
         self.a.amenity_ids = ["one", "two", "three"]
-
         self.b = Place()
 
     def test_instance(self):
@@ -174,3 +174,16 @@ class TestPlace(unittest.TestCase):
 
         for elem in self.a.amenity_ids:
             self.assertEqual(type(elem), str)
+
+    def test_inherit(self):
+        """test method
+
+        Args:
+            na
+        Description:
+            if subclass of BaseModel
+        Return:
+            na
+        """
+
+        self.assertTrue(issubclass(Place, BaseModel))

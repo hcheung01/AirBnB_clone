@@ -100,3 +100,16 @@ class TestReview(unittest.TestCase):
         self.assertEqual(type(self.b.place_id), str)
         self.assertEqual(type(self.b.user_id), str)
         self.assertEqual(type(self.b.text), str)
+
+    def test_inherit(self):
+        """test method
+
+        Args:
+            na
+        Description:
+            if subclass of BaseModel
+        Return:
+            na
+        """
+
+        self.assertTrue(issubclass(Review, BaseModel))

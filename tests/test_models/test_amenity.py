@@ -2,6 +2,7 @@
 """
 Test Module
 """
+from models.base_model import BaseModel
 from models.amenity import Amenity
 import unittest
 
@@ -95,3 +96,16 @@ class TestAmenity(unittest.TestCase):
         """
 
         self.assertIsInstance(self.a.name, str)
+
+    def test_inherit(self):
+        """test method
+
+        Args:
+            na
+        Description:
+            if subclass of BaseModel
+        Return:
+            na
+        """
+
+        self.assertTrue(issubclass(Amenity, BaseModel))

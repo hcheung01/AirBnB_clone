@@ -93,3 +93,16 @@ class TestCity(unittest.TestCase):
         self.assertEqual(self.b.name, "")
         self.assertEqual(type(self.a.name), str)
         self.assertEqual(type(self.b.name), str)
+
+    def test_inherit(self):
+        """test method
+
+        Args:
+            na
+        Description:
+            if subclass of BaseModel
+        Return:
+            na
+        """
+
+        self.assertTrue(issubclass(City, BaseModel))
