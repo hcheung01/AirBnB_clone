@@ -41,7 +41,7 @@ class TestAmenity(unittest.TestCase):
         del self.a
         del self.b
         try:
-            os.remove(file.json)
+            os.remove("file.json")
         except FileNotFoundError:
             pass
 
