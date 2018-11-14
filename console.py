@@ -100,23 +100,35 @@ class HBNBCommand(cmd.Cmd):
             args: cmdline input
         Description:
             show specific instance with id number
+            Usage: show <class name> <id>
         Return:
             na
         """
 
         args = args.split()
-        if not len(args):
-            print("** class name missing **")
-        else:
-            if len(args) < 2:
-                print("** instance id missing **")
-            else:
-                name = args[0] + "." + args[1]
-                all_objs = storage.all()
-                if name in all_objs:
-                    print(all_objs[name])
+        error = 0
+        for i in range(2):
+            try:
+                args[i]
+            except:
+                if error == 0:
+                    print("** class name missing **")
+                    break
                 else:
+                    print("** instance id missing **")
+                    break
+            if i == 0:
+                if args[i] not in self.__cls_list:
+                    print("** class doesn't exist **")
+                    break
+            else:
+                key = args[0] + "." + args[1]
+                obj_dict = storage.all()
+                if key not in obj_dict.keys():
                     print("** no instance found **")
+                else:
+                    print(obj_dict[key])
+            error += 1
 
     def do_destroy(self, args):
         """delete method
@@ -125,25 +137,37 @@ class HBNBCommand(cmd.Cmd):
             args: cmdline input
         Description:
             delete instance and update JSON
+            Usage: destroy <class name> <id>
         Return:
             na
         """
 
         args = args.split()
-        if not len(args):
-            print("** class name missing **")
-        elif len(args) < 2:
-            print("** instance id missing **")
-        elif args[0] not in self.__cls_list:
-            print("** class doesn't exist **")
-        else:
-            name = args[0] + "." + args[1]
-            all_objs = storage.all()
-            if name not in all_objs:
-                print("** no instance found **")
+        error = 0
+        for i in range(2):
+            try:
+                args[i]
+            except:
+                if error == 0:
+                    print("** class name missing **")
+                    break
+                else:
+                    print("** instance id missing **")
+                    break
+            if i == 0:
+                if args[i] not in self.__cls_list:
+                    print("** class doesn't exist **")
+                    break
             else:
-                all_objs.pop(name)
-                storage.save()
+                key = args[0] + "." + args[1]
+                all_objs = storage.all()
+                if key not in all_objs.keys():
+                    print("** no instance found **")
+                    break
+                else:
+                    all_objs.pop(key)
+                    storage.save()
+            error += 1
 
     def do_all(self, args):
         """all method
