@@ -5,6 +5,8 @@ Test Module
 from models.base_model import BaseModel
 from models.place import Place
 import unittest
+import pep8
+import os
 
 
 class TestPlace(unittest.TestCase):
@@ -52,6 +54,13 @@ class TestPlace(unittest.TestCase):
             os.remove(file.json)
         except FileNotFoundError:
             pass
+
+    def test_pep8_conformance(self):
+        """Test that we conform to PEP8"""
+
+        pep8_style = pep8.StyleGuide(quiet=True)
+        result = pep8_style.check_files(['models/amenity.py'])
+        self.assertEqual(result.total_errors, 0, "Found code style errors.")
 
     def test_instance(self):
         """test method
