@@ -117,12 +117,3 @@ class TestAmenity(unittest.TestCase):
         """
 
         self.assertTrue(issubclass(Amenity, BaseModel))
-
-    def test_save_json(self):
-        """test if inherit from basemodel and save to json"""
-
-        self.a.save()
-        self.b.save()
-        myfile = "/home/vagrant/AirBnB_clone/file.json"
-        self.assertTrue(os.path.isfile(myfile))
-
