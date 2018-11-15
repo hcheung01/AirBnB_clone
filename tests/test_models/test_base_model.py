@@ -9,6 +9,7 @@ from models import storage
 import pep8
 import os
 
+
 class TestBaseModel(unittest.TestCase):
     """ Test Case for BaseModel """
 
@@ -38,9 +39,8 @@ class TestBaseModel(unittest.TestCase):
         del self.old_dict
         del self.new_model
 
-        myfile = "/home/vagrant/AirBnB_clone/file.json"
         try:
-            os.remove(myfile)
+            os.remove("file.json")
         except FileNotFoundError:
             pass
 
@@ -231,6 +231,8 @@ class TestBaseModel(unittest.TestCase):
 
         self.a.save()
         self.assertNotEqual(self.a.created_at, self.a.updated_at)
+        myfile = "/home/vagrant/AirBnB_clone/file.json"
+        self.assertEqual(os.remove(myfile), None)
 
 if __name__ == "__main__":
     unittest.main()
