@@ -28,17 +28,17 @@ class TestAmenity(unittest.TestCase):
         self.b = Amenity()
 
     def teardown(self):
-         """teardown method
+        """teardown method
 
-         Args:
-             na
-         Description:
-             remove testing instances and delete file.json file
-         Return:
-             na
-         """
-         del self.a
-         del self.b
+        Args:
+            na
+        Description:
+            remove testing instances and delete file.json file
+        Return:
+            na
+        """
+        del self.a
+        del self.b
 
     def test_pep8_conformance(self):
         """Test that we conform to PEP8"""

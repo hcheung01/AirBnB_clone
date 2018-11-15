@@ -37,6 +37,19 @@ class TestPlace(unittest.TestCase):
         self.a.amenity_ids = ["one", "two", "three"]
         self.b = Place()
 
+    def teardown(self):
+        """teardown method
+
+        Args:
+            na
+        Description:
+            remove testing instances and delete file.json file
+        Return:
+            na
+        """
+        del self.a
+        del self.b
+
     def test_pep8_conformance(self):
         """Test that we conform to PEP8"""
 
@@ -196,3 +209,24 @@ class TestPlace(unittest.TestCase):
         """
 
         self.assertTrue(issubclass(Place, BaseModel))
+
+    def test_save_json(self):
+        """test if inherit from basemodel and save to json"""
+
+        myfile = "/home/vagrant/AirBnB_clone/file.json"
+        self.assertFalse(os.path.isfile(myfile))
+        try:
+            os.path.isfile(myfile)
+            os.remove(myfile)
+            self.assertFalse(os.path.isfile(myfile))
+        except FileNotFoundError:
+            pass
+
+    def test_file_exist(self):
+        """test if file exist after delete"""
+
+        myfile = "/home/vagrant/AirBnB_clone/file.json"
+        self.assertFalse(os.path.isfile(myfile))
+
+if __name__ == "__main__":
+    unittest.main()
