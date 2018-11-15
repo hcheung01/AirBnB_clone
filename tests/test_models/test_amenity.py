@@ -26,6 +26,8 @@ class TestAmenity(unittest.TestCase):
         self.a = Amenity()
         self.a.name = "Hemant"
         self.b = Amenity()
+        self.a.save()
+        self.b.save()
 
     def teardown(self):
         """teardown method
@@ -39,6 +41,14 @@ class TestAmenity(unittest.TestCase):
         """
         del self.a
         del self.b
+        myfile = "/home/vagrant/AirBnB_clone/file.json"
+        self.assertTrue(os.path.isfile(myfile))
+        try:
+            os.path.isfile(myfile)
+            os.remove(myfile)
+            self.assertFalse(os.path.isfile(myfile))
+        except FileNotFoundError:
+            pass
 
     def test_pep8_conformance(self):
         """Test that we conform to PEP8"""
@@ -131,25 +141,11 @@ class TestAmenity(unittest.TestCase):
 
         self.assertTrue(issubclass(Amenity, BaseModel))
 
-    def test_save_json(self):
-        """test if inherit from basemodel and save to json"""
-
-        self.a.save()
-        self.b.save()
-        myfile = "/home/vagrant/AirBnB_clone/file.json"
-        self.assertTrue(os.path.isfile(myfile))
-        try:
-            os.path.isfile(myfile)
-            os.remove(myfile)
-            self.assertFalse(os.path.isfile(myfile))
-        except FileNotFoundError:
-            pass
-
     def test_file_exist(self):
         """test if file exist after delete"""
 
         myfile = "/home/vagrant/AirBnB_clone/file.json"
-        self.assertFalse(os.path.isfile(myfile))
+        self.assertTrue(os.path.isfile(myfile))
 
 if __name__ == "__main__":
     unittest.main()
