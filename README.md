@@ -14,6 +14,38 @@ To build a command interpreter that can:
 `./console.py`
 
 ## Usage
+
+
+### Interactive mode
+Interactive mode starts when the console is run using `./console`
+
+### Non interactive mode
+A test file that contains all the commands below can be piped into the console
+Example:
+```
+$ cat commands
+help create
+create BaseModel
+all BaseModel
+```
+Any text file that contains the commands will be run as if it were in interactive mode
+
+```
+$ cat commands | ./console.py
+(hbnb)
+Creates a new instance of <class-name>, prints the id of instance, and saves the instance to the json file.
+
+Valid Class Names: ['BaseModel', 'User', 'Place', 'State', 'City', 'Amenity', 'Review']
+Usage: (hbnb) create <valid class name>
+
+Possible errors that can print:
+**class name missing **: prints when a class name is not given to create
+** class doesn't exist **: prints when an invalid class name is given to create
+
+(hbnb) b88d428a-d4b4-4836-ac0d-5ab7a61747e2
+(hbnb) ["[BaseModel] (c180b06f-49eb-4fea-9b34-b49f1ddc0e82) {'id': 'c180b06f-49eb-4fea-9b34-b49f1ddc0e82', 'created_at': datetime.datetime(2018, 11, 15, 3, 49, 34, 471458), 'updated_at': datetime.datetime(2018, 11, 15, 3, 49, 34, 471485)}", "[BaseModel] (3280b43e-486a-4484-badc-5915e9756bc9) {'id': '3280b43e-486a-4484-badc-5915e9756bc9', 'created_at': datetime.datetime(2018, 11, 15, 3, 49, 27, 763802), 'updated_at': datetime.datetime(2018, 11, 15, 3, 49, 27, 763839)}", "[BaseModel] (b88d428a-d4b4-4836-ac0d-5ab7a61747e2) {'id': 'b88d428a-d4b4-4836-ac0d-5ab7a61747e2', 'created_at': datetime.datetime(2018, 11, 15, 4, 53, 36, 701570), 'updated_at': datetime.datetime(2018, 11, 15, 4, 53, 36, 701648)}", "[BaseModel] (329cb92c-7aa5-4257-b5f1-d28a0a091e9c) {'id': '329cb92c-7aa5-4257-b5f1-d28a0a091e9c', 'created_at': datetime.datetime(2018, 11, 15, 4, 48, 35, 675213), 'updated_at': datetime.datetime(2018, 11, 15, 4, 48, 35, 675357)}"]
+```
+
 Available commands:
 
 ### all
