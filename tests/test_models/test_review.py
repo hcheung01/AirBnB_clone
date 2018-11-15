@@ -39,7 +39,6 @@ class TestReview(unittest.TestCase):
             na
         """
         self.a.save()
-        self.b.save()
         del self.a
         del self.b
         myfile = "/home/vagrant/AirBnB_clone/file.json"
@@ -145,19 +144,11 @@ class TestReview(unittest.TestCase):
 
         self.assertTrue(issubclass(Review, BaseModel))
 
-    def test_save_json(self):
-        """test if inherit from basemodel and save to json"""
+    def test_save(self):
+        """test save"""
 
-        self.a.save()
         self.b.save()
-        myfile = "/home/vagrant/AirBnB_clone/file.json"
-        self.assertTrue(os.path.isfile(myfile))
-        try:
-            os.path.isfile(myfile)
-            os.remove(myfile)
-            self.assertFalse(os.path.isfile(myfile))
-        except FileNotFoundError:
-            pass
+        self.assertNotEqual(self.b.created_at, self.b.updated_at)
 
 if __name__ == "__main__":
     unittest.main()

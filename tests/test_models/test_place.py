@@ -36,8 +36,6 @@ class TestPlace(unittest.TestCase):
         self.a.longitude = 8.5
         self.a.amenity_ids = ["one", "two", "three"]
         self.b = Place()
-        self.a.save()
-        self.b.save()
 
     def teardown(self):
         """teardown method
@@ -49,6 +47,7 @@ class TestPlace(unittest.TestCase):
         Return:
             na
         """
+        self.a.save()
         del self.a
         del self.b
         myfile = "/home/vagrant/AirBnB_clone/file.json"
@@ -225,6 +224,12 @@ class TestPlace(unittest.TestCase):
 
         myfile = "/home/vagrant/AirBnB_clone/file.json"
         self.assertTrue(os.path.isfile(myfile))
+
+    def test_save(self):
+        """test save"""
+
+        self.b.save()
+        self.assertNotEqual(self.b.created_at, self.b.updated_at)
 
 if __name__ == "__main__":
     unittest.main()

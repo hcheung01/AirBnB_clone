@@ -40,7 +40,6 @@ class TestCity(unittest.TestCase):
             na
         """
         self.a.save()
-        self.b.save()
         del self.a
         del self.b
         myfile = "/home/vagrant/AirBnB_clone/file.json"
@@ -137,6 +136,12 @@ class TestCity(unittest.TestCase):
         """
 
         self.assertTrue(issubclass(City, BaseModel))
+
+    def test_save(self):
+        """test save"""
+
+        self.b.save()
+        self.assertNotEqual(self.b.created_at, self.b.updated_at)
 
 if __name__ == "__main__":
     unittest.main()
