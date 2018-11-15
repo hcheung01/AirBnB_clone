@@ -162,6 +162,37 @@ Let's create an instance of Place and update it with an attribute called 'rooms'
 
 # Repo hierarchy
 Import output from tree when close to deadline
+.
+├── AUTHORS
+├── console.py
+├── file.json
+├── models
+│   ├── amenity.py
+│   ├── base_model.py
+│   ├── city.py
+│   ├── engine
+│   │   ├── file_storage.py
+│   │   ├── __init__.py
+│   ├── __init__.py
+│   ├── place.py
+│   ├── review.py
+│   ├── state.py
+│   └── user.py
+├── README.md
+└── tests
+    ├── __init__.py
+    └── test_models
+        ├── __init__.py
+        ├── test_amenity.py
+        ├── test_base_model.py
+        ├── test_city.py
+        ├── test_engine
+        │   ├── __init__.py
+        │   └── test_file_storage.py
+        ├── test_place.py
+        ├── test_review.py
+        ├── test_state.py
+        └── test_user.py
 
 # Authors
 Hemant Heer  
