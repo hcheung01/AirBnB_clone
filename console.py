@@ -20,6 +20,7 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
     __cls_list = ["BaseModel", "User", "Place", "State",
                   "City", "Amenity", "Review"]
+    dummy_list = []
 
     def do_quit(self, line):
         """ Stops the command loop
@@ -69,16 +70,32 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def help_create(self):
-        print("""Creates a new instance of <class-name>
-    def do_create(self, args):
-        """create instance method
+        """ Defines the contents of the help_create
+        """
+        print()
+        print("Creates a new instance of <class-name>, ", end='')
+        print("prints the id of instance, and ", end='')
+        print("saves the instance to the json file.")
+        print()
+        print("Valid Class Names: {}".format(self.__cls_list))
+        print("Usage: (hbnb) create <valid class name>")
+        print()
+        print("Possible errors that can print:")
+        print("**class name missing **: ", end='')
+        print("prints when a class name is not given to create")
+        print("** class doesn't exist **:", end='')
+        print(" prints when an invalid class name is given to create")
+        print()
 
+    def do_create(self, args):
+        """Creates a new instance of <class name> and <id>,
+            prints the id of instance, and
+            saves the instance to the json file.
         Args:
-            args: cmdline input
-        Description:
-            create new instance with id and datetime
-        Return:
-            na
+            args: arguments given to `create`
+
+        Usage:
+            (hbnb) create <valid class name>
         """
 
         args = args.split()
@@ -96,15 +113,14 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
 
     def do_show(self, args):
-        """show method
-
+        """prints the string representation of an instance
+            based on the class name and id
         Args:
-            args: cmdline input
+            args: arguments given to 'show'
         Description:
-            show specific instance with id number
-            Usage: show <class name> <id>
-        Return:
-            na
+            shows a specific instance on the stdout
+        Usage:
+            show <class name> <id>
         """
 
         args = args.split()
@@ -132,16 +148,36 @@ class HBNBCommand(cmd.Cmd):
                     print(obj_dict[key])
             error += 1
 
+    def help_show(self):
+        """ Statements that print when help is called on show
+        """
+        print()
+        print("prints the string representation of an ", end='')
+        print("instance based on the class name and id")
+        print()
+        print("Valid Class Names: {}".format(self.__cls_list))
+        print("Usage: (hbnb) show <class name> <valid id>")
+        print()
+        print("Possible errors that can print:")
+        print("** class name missing **", end='')
+        print(": prints when a class name is not given to show")
+        print("** class doesn't exist **", end='')
+        print(": prints when an invalid class name is given")
+        print("** instance id missing **", end='')
+        print(": prints if the id wasn't typed in after a valid class name")
+        print("** no instance found **", end='')
+        print(": prints when a bad ID is typed after a valid class name")
+        print()
+
     def do_destroy(self, args):
-        """delete method
+        """
+        Deletes an instance based on 'class name' and 'id'.
+        Saves the deletion to the json file.
 
         Args:
-            args: cmdline input
-        Description:
-            delete instance and update JSON
-            Usage: destroy <class name> <id>
-        Return:
-            na
+            args: input given to 'destroy'
+        Usage:
+            (hbnb) destroy <class name> <id>
         """
 
         args = args.split()
@@ -171,18 +207,37 @@ class HBNBCommand(cmd.Cmd):
                     storage.save()
             error += 1
 
-    def do_all(self, args):
-        """all method
+    def help_destroy(self):
+        """ Defines the statements printing on stdout
+            when "help destroy is called
+        """
+        print()
+        print("Deletes an instance based on <class name> and <id>", end='')
+        print(". Saves the deletion to the json file.")
+        print()
+        print("Valid Class Names: {}".format(self.__cls_list))
+        print("Usage: (hbnb) destroy <class name> <id>")
+        print()
+        print("Common errors that can print:")
+        print("** class name missing **: ", end='')
+        print("e.g (hbnb) destroy")
+        print("** class doesn't exist **: ", end='')
+        print("prints when an invalid class name was given to destroy")
+        print("** instance id missing **: ", end='')
+        print("prints when an ID was not typed after a valid class name")
+        print("** no instance found **: ", end='')
+        print("when an instance of a valid class name doesn't exist for id")
+        print()
 
+    def do_all(self, args):
+        """Print a list of instances(string representations) that match
+           the class name. If a class name wasn't provided, it prints all
+           instances in the json file
         Args:
-            args: cmdline input
-        Description:
-            show all instances
+            args: arguments given to `all`
         Usage:
             all --Shows everything in the json file
             all <Class Name> -- Shows only certain instances
-        Return:
-            na
         """
         args = args.split()
         all_objs = storage.all()
@@ -205,6 +260,7 @@ class HBNBCommand(cmd.Cmd):
                     inst_list = []
                     [inst_list.append(v) for k, v in all_objs.items()
                         if k.split(".")[0] == args[0]]
+                    self.dummy_list = inst_list.copy()
                     if len(inst_list) == 0:
                         break
                     else:
@@ -213,14 +269,39 @@ class HBNBCommand(cmd.Cmd):
 
             error += 1
 
+    def help_all(self):
+        """ Defines the statements that print when
+            `help all` is called
+        """
+        print()
+        print("Print a list of instances(string representations)", end='')
+        print(" that match the class name.", end='')
+        print(" If a class name wasn't provided, it prints", end='')
+        print(" all instances in the json file")
+        print()
+        print("Usage:")
+        print("Valid Class Names: {}".format(self.__cls_list))
+        print("(hbnb) all......prints all instances in the json file")
+        print("(hbnb) all <valid class name>....prints instances of", end='')
+        print(" that class")
+        print()
+        print("Common errors:")
+        print("** class doesn't exist **: ", end='')
+        print(" prints when an invalid class name was given to all")
+        print()
+
     def do_update(self, args):
-        """Update Method
+        """
+        Updates an instance of 'class name' and 'id' with an attribute
+        and value. Saves the change to the json file.
+
         Args:
-            args: cmd line args
+            args: arguments given to 'update'
         Description:
-            update or add class attributes
-        Return:
-            na
+            updates existing attributes or adds a new attribute to the
+            instance
+        Usage:
+            (hbnb) update <class name> <id> <attribute> <value>
         """
 
         args = args.split()
@@ -271,15 +352,47 @@ class HBNBCommand(cmd.Cmd):
             if i < 3:
                 error += 1
 
+    def help_update(self):
+        """
+        Defines the statements that print when `help update` is called
+        """
+        print()
+        print("Updates an instance of <class name> and <id>", end='')
+        print(" with an attribute and value", end='')
+        print(". Saves the change to the json file.")
+        print()
+        print("You cannot update 'id', 'created_at', 'updated_at'")
+        print("The command ignores everything after the first ", end='')
+        print("attribute-value pair")
+        print()
+        print("Valid Class Names: {}".format(self.__cls_list))
+        print("Usage: (hbnb) update <class name> <id> <attribute> <value>")
+        print()
+        print("Common errors that can print:")
+        print("** class name missing **: ", end='')
+        print("e.g (hbnb) update")
+        print("** class doesn't exist **: ", end='')
+        print("prints when an invalid class name was given to update")
+        print("** instance id missing **: ", end='')
+        print("prints when an ID was not typed after a valid class name")
+        print("** no instance found **: ", end='')
+        print("when an instance of a valid class name doesn't exist for id")
+        print("** attribute name missing **: ", end='')
+        print("prints when an attribute name wasn't typed in after id")
+        print("** value missing **: ", end='')
+        print("prints when the value wasn't typed after a valid attribute")
+        print()
+
     def default(self, text):
-        """default method
+        """Runs when input to the console doesn't match any command
 
         Args:
-            text: cmdline input
+            text: input received from stdin
         Description:
-            show text in dictionary mapping
+            Runs the specified command by parsing the text for certain
+            characters
         Return:
-            na
+            The correct command that was defined previously
         """
 
         text_maps = {
@@ -291,8 +404,17 @@ class HBNBCommand(cmd.Cmd):
             'Place.all()': 'Place',
             'Review.all()': 'Review'
         }
-        if text in text_maps.keys():
-            return self.do_all(text_maps[text])
+        clsName_func_list = text.split('.')
+
+        if clsName_func_list[1] == 'all()':
+            return self.do_all(clsName_func_list[0])
+        elif clsName_func_list[1] == 'count()':
+            storage_keys = storage.all().keys()
+            count = 0
+            for key in storage_keys:
+                if key.split('.')[0] == clsName_func_list[0]:
+                    count += 1
+            print(count)
 
 
 if __name__ == '__main__':
