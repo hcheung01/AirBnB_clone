@@ -146,9 +146,7 @@ class TestReview(unittest.TestCase):
         self.b.save()
         self.assertNotEqual(self.b.created_at, self.b.updated_at)
         myfile = "/home/vagrant/AirBnB_clone/file.json"
-        self.assertTrue(os.path.isfile(myfile))
         self.assertEqual(os.remove(myfile), None)
-        self.assertFalse(os.path.isfile(myfile))
 
 if __name__ == "__main__":
     unittest.main()

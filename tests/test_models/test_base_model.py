@@ -232,9 +232,7 @@ class TestBaseModel(unittest.TestCase):
         self.a.save()
         self.assertNotEqual(self.a.created_at, self.a.updated_at)
         myfile = "/home/vagrant/AirBnB_clone/file.json"
-        self.assertTrue(os.path.isfile(myfile))
         self.assertEqual(os.remove(myfile), None)
-        self.assertFalse(os.path.isfile(myfile))
 
 if __name__ == "__main__":
     unittest.main()
