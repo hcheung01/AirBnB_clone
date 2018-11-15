@@ -75,6 +75,20 @@ If you want to narrow down the output to a specific class
 ["[BaseModel] (c180b06f-49eb-4fea-9b34-b49f1ddc0e82) {'created_at': datetime.datetime(2018, 11, 15, 3, 49, 34, 471458), 'id': 'c180b06f-49eb-4fea-9b34-b49f1ddc0e82', 'updated_at': datetime.datetime(2018, 11, 15, 3, 49, 34, 471485)}", "[BaseModel] (3280b43e-486a-4484-badc-5915e9756bc9) {'created_at': datetime.datetime(2018, 11, 15, 3, 49, 27, 763802), 'id': '3280b43e-486a-4484-badc-5915e9756bc9', 'updated_at': datetime.datetime(2018, 11, 15, 3, 49, 27, 763839)}"]
 ```
 
+Alternative syntax - `<class name>.all()`
+```
+(hbnb) BaseModel.all()
+["[BaseModel] (b88d428a-d4b4-4836-ac0d-5ab7a61747e2) {'created_at': datetime.datetime(2018, 11, 15, 4, 53, 36, 701570), 'id': 'b88d428a-d4b4-4836-ac0d-5ab7a61747e2', 'updated_at': datetime.datetime(2018, 11, 15, 4, 53, 36, 701648)}", "[BaseModel] (329cb92c-7aa5-4257-b5f1-d28a0a091e9c) {'created_at': datetime.datetime(2018, 11, 15, 4, 48, 35, 675213), 'id': '329cb92c-7aa5-4257-b5f1-d28a0a091e9c', 'updated_at': datetime.datetime(2018, 11, 15, 4, 48, 35, 675357)}", "[BaseModel] (3280b43e-486a-4484-badc-5915e9756bc9) {'created_at': datetime.datetime(2018, 11, 15, 3, 49, 27, 763802), 'id': '3280b43e-486a-4484-badc-5915e9756bc9', 'updated_at': datetime.datetime(2018, 11, 15, 3, 49, 27, 763839)}", "[BaseModel] (c180b06f-49eb-4fea-9b34-b49f1ddc0e82) {'created_at': datetime.datetime(2018, 11, 15, 3, 49, 34, 471458), 'id': 'c180b06f-49eb-4fea-9b34-b49f1ddc0e82', 'updated_at': datetime.datetime(2018, 11, 15, 3, 49, 34, 471485)}"]
+```
+ 
+### .count()
+Prints the number of instances of the class \
+Usage `<class name>.count()`
+```
+(hbnb) BaseModel.count()
+4
+``` 
+
 ### create
 * Creates a new instance of 'class-name', prints the id of instance, and saves the instance to the json file.
 
@@ -123,6 +137,18 @@ If you want to narrow down the output to a specific class
 (hbnb)
 ```
 As you can see, the instance was deleted. `all BaseModel` shows instances that are currently stored in the json file
+
+Alternative Syntax - `<class name>.destroy(<id>)`
+```
+(hbnb) all Amenity
+["[Amenity] (dc5d752b-d403-4c7d-aaa0-5f7a2dcaeb1d) {'created_at': datetime.datetime(2018, 11, 15, 3, 49, 43, 611294), 'id': 'dc5d752b-d403-4c7d-aaa0-5f7a2dcaeb1d', 'updated_at': datetime.datetime(2018, 11, 15, 3, 49, 43, 611319)}", "[Amenity] (570bfab8-f90c-4e46-90f2-961955754450) {'created_at': datetime.datetime(2018, 11, 15, 3, 49, 18, 286804), 'id': '570bfab8-f90c-4e46-90f2-961955754450','updated_at': datetime.datetime(2018, 11, 15, 3, 49, 18, 286831)}"]
+(hbnb)
+(hbnb)
+(hbnb) Amenity.destroy("dc5d752b-d403-4c7d-aaa0-5f7a2dcaeb1d")
+(hbnb)
+(hbnb) all Amenity
+["[Amenity] (570bfab8-f90c-4e46-90f2-961955754450) {'created_at': datetime.datetime(2018, 11, 15, 3, 49, 18, 286804), 'id': '570bfab8-f90c-4e46-90f2-961955754450', 'updated_at': datetime.datetime(2018, 11, 15, 3, 49, 18, 286831)}"]
+```
   
 ### show
 * prints the string representation of an instance based on the class name and id
@@ -146,6 +172,12 @@ Let's use that information to display the second instance of Amenity
 ```
 (hbnb) show Amenity 6f727d54-dd8f-4bb8-8796-c12b4d60e018
 [Amenity] (6f727d54-dd8f-4bb8-8796-c12b4d60e018) {'created_at': datetime.datetime(2018, 11, 15, 3, 34, 51, 482912), 'id': '6f727d54-dd8f-4bb8-8796-c12b4d60e018', 'updated_at': datetime.datetime(2018, 11, 15, 3, 34, 51, 482937)}
+```
+
+Alternative syntax: `<class name>.show(<id>)`
+```
+(hbnb) BaseModel.show("b88d428a-d4b4-4836-ac0d-5ab7a61747e2")
+[BaseModel] (b88d428a-d4b4-4836-ac0d-5ab7a61747e2) {'created_at': datetime.datetime(2018, 11, 15, 4, 53, 36, 701570), 'id': 'b88d428a-d4b4-4836-ac0d-5ab7a61747e2', 'updated_at': datetime.datetime(2018, 11, 15, 4, 53, 36, 701648)}
 ```
   
 ### update
@@ -174,6 +206,15 @@ Let's create an instance of Place and update it with an attribute called 'rooms'
 (hbnb)
 (hbnb) show Place 333ef6ff-3ffd-4124-8349-940d43c89e72
 [Place] (333ef6ff-3ffd-4124-8349-940d43c89e72) {'id': '333ef6ff-3ffd-4124-8349-940d43c89e72', 'created_at': datetime.datetime(2018, 11, 15, 3, 39, 41, 148125), 'updated_at': datetime.datetime(2018, 11, 15, 3, 39, 41, 148149), 'rooms': '5'}
+```
+
+Alternative Syntax - `<class name>.update(<id>, <attribute name>, <attribute value>)`
+```
+(hbnb) Amenity.show("293ffa2b-944a-428a-9f1b-7ea233a88b4d")
+[Amenity] (293ffa2b-944a-428a-9f1b-7ea233a88b4d) {'created_at': datetime.datetime(2018, 11, 15, 5, 27, 2, 620221), 'updated_at': datetime.datetime(2018, 11, 15, 5, 27, 2, 620246), 'id': '293ffa2b-944a-428a-9f1b-7ea233a88b4d'}
+(hbnb) Amenity.update("293ffa2b-944a-428a-9f1b-7ea233a88b4d", "rooms", 6)
+(hbnb) Amenity.show("293ffa2b-944a-428a-9f1b-7ea233a88b4d")
+[Amenity] (293ffa2b-944a-428a-9f1b-7ea233a88b4d) {'created_at': datetime.datetime(2018, 11, 15, 5, 27, 2, 620221), 'updated_at': datetime.datetime(2018, 11, 15, 5, 27, 2, 620246), 'id': '293ffa2b-944a-428a-9f1b-7ea233a88b4d', 'rooms': '6'}
 ```
 
 ### help
