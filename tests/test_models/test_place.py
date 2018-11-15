@@ -220,19 +220,11 @@ class TestPlace(unittest.TestCase):
 
         self.assertTrue(issubclass(Place, BaseModel))
 
-    def test_save_json(self):
-        """test if inherit from basemodel and save to json"""
+    def test_file_exist(self):
+        """test if file exist after delete"""
 
-        self.a.save()
-        self.b.save()
         myfile = "/home/vagrant/AirBnB_clone/file.json"
-        self.assertTrue(os.path.isfile(myfile))
-        try:
-            os.path.isfile(myfile)
-            os.remove(myfile)
-            self.assertFalse(os.path.isfile(myfile))
-        except FileNotFoundError:
-            pass
+        self.assertFalse(os.path.isfile(myfile))
 
 if __name__ == "__main__":
     unittest.main()
