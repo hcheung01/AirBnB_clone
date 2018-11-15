@@ -40,7 +40,7 @@ Available commands:
   
   
 ### destroy
-* Deletes an instance based on <class name> and <id>. Saves the deletion to the json file.
+* Deletes an instance based on 'class name' and 'id'. Saves the deletion to the json file.
 
 * Valid Class Names: ['BaseModel', 'User', 'Place', 'State', 'City', 'Amenity', 'Review']
 * Usage: `(hbnb) destroy <class name> <id>`
