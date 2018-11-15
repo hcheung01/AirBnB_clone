@@ -427,6 +427,18 @@ class HBNBCommand(cmd.Cmd):
             string_id = norm_show.split(" ")[1]
             cls_name_with_id = clsName_func_list[0] + ' ' + string_id
             return self.do_show(cls_name_with_id)
+        elif "destroy" in clsName_func_list[1]:
+            full_destroy = clsName_func_list[1]
+            destroy_list = list(full_destroy)
+            for i in range(len(destroy_list)):
+                if destroy_list[i] in ('(', ')'):
+                    destroy_list[i] = " "
+                if destroy_list[i] == '"':
+                    destroy_list[i] = ""
+            norm_destroy = ''.join(destroy_list)
+            string_id = norm_destroy.split(" ")[1]
+            cls_name_with_id = clsName_func_list[0] + ' ' + string_id
+            return self.do_destroy(cls_name_with_id)
 
 
 if __name__ == '__main__':
