@@ -28,7 +28,7 @@ Available commands:
   * ** class doesn't exist **:  prints when an invalid class name was given to all
 
 ### create
-* Creates a new instance of <class-name>, prints the id of instance, and saves the instance to the json file.
+* Creates a new instance of 'class-name', prints the id of instance, and saves the instance to the json file.
 
 * Usage
   * Valid Class Names: ['BaseModel', 'User', 'Place', 'State', 'City', 'Amenity', 'Review']
@@ -64,7 +64,7 @@ Available commands:
   * ** no instance found **: prints when a bad ID is typed after a valid class name
   
 ### update
-* Updates an instance of <class name> and <id> with an attribute and value. Saves the change to the json file.
+* Updates an instance of 'class name' and 'id' with an attribute and value. Saves the change to the json file.
 
 * You cannot update 'id', 'created_at', 'updated_at'
 * The command ignores everything after the first attribute-value pair
