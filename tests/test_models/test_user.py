@@ -8,6 +8,8 @@ from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 from models.user import User
 from models import storage
+import pep8
+import os
 
 
 class TestUser(unittest.TestCase):
@@ -29,8 +31,37 @@ class TestUser(unittest.TestCase):
         self.a.password = "Holberton"
         self.a.first_name = "Heiny"
         self.a.last_name = "Cheung"
-
         self.b = User()
+
+    def teardown(self):
+        """teardown method
+
+        Args:
+            na
+        Description:
+            remove testing instances and delete file.json file
+        Return:
+            na
+        """
+        self.a.save()
+        self.b.save()
+        del self.a
+        del self.b
+        myfile = "/home/vagrant/AirBnB_clone/file.json"
+        self.assertTrue(os.path.isfile(myfile))
+        try:
+            os.path.isfile(myfile)
+            os.remove(myfile)
+            self.assertFalse(os.path.isfile(myfile))
+        except FileNotFoundError:
+                pass
+
+    def test_pep8_conformance(self):
+        """Test that we conform to PEP8"""
+
+        pep8_style = pep8.StyleGuide(quiet=True)
+        result = pep8_style.check_files(['models/amenity.py'])
+        self.assertEqual(result.total_errors, 0, "Found code style errors.")
 
     def test_email(self):
         """Setup Method
@@ -95,3 +126,39 @@ class TestUser(unittest.TestCase):
         self.assertIsInstance(self.a.last_name, str)
         self.assertIsInstance(self.b.last_name, str)
         self.assertEqual(self.b.last_name, "")
+
+    def test_inherit(self):
+        """test method
+
+        Args:
+            na
+        Description:
+            if subclass of BaseModel
+        Return:
+            na
+        """
+
+        self.assertTrue(issubclass(User, BaseModel))
+
+    def test_save_json(self):
+        """test if inherit from basemodel and save to json"""
+
+        self.a.save()
+        self.b.save()
+        myfile = "/home/vagrant/AirBnB_clone/file.json"
+        self.assertTrue(os.path.isfile(myfile))
+        try:
+            os.path.isfile(myfile)
+            os.remove(myfile)
+            self.assertFalse(os.path.isfile(myfile))
+        except FileNotFoundError:
+            pass
+
+    def test_file_exist(self):
+        """test if file exist after delete"""
+
+        myfile = "/home/vagrant/AirBnB_clone/file.json"
+        self.assertFalse(os.path.isfile(myfile))
+
+if __name__ == "__main__":
+    unittest.main()

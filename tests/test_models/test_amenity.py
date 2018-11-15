@@ -5,6 +5,8 @@ Test Module
 from models.base_model import BaseModel
 from models.amenity import Amenity
 import unittest
+import pep8
+import os
 
 
 class TestAmenity(unittest.TestCase):
@@ -23,8 +25,37 @@ class TestAmenity(unittest.TestCase):
 
         self.a = Amenity()
         self.a.name = "Hemant"
-
         self.b = Amenity()
+
+    def teardown(self):
+        """teardown method
+
+        Args:
+            na
+        Description:
+            remove testing instances and delete file.json file
+        Return:
+            na
+        """
+        self.a.save()
+        self.b.save()
+        del self.a
+        del self.b
+        myfile = "/home/vagrant/AirBnB_clone/file.json"
+        self.assertTrue(os.path.isfile(myfile))
+        try:
+            os.path.isfile(myfile)
+            os.remove(myfile)
+            self.assertFalse(os.path.isfile(myfile))
+        except FileNotFoundError:
+            pass
+
+    def test_pep8_conformance(self):
+        """Test that we conform to PEP8"""
+
+        pep8_style = pep8.StyleGuide(quiet=True)
+        result = pep8_style.check_files(['models/amenity.py'])
+        self.assertEqual(result.total_errors, 0, "Found code style errors.")
 
     def test_instance(self):
         """test method
@@ -109,3 +140,12 @@ class TestAmenity(unittest.TestCase):
         """
 
         self.assertTrue(issubclass(Amenity, BaseModel))
+
+    def test_file_exist(self):
+        """test if file exist after delete"""
+
+        myfile = "/home/vagrant/AirBnB_clone/file.json"
+        self.assertFalse(os.path.isfile(myfile))
+
+if __name__ == "__main__":
+    unittest.main()
