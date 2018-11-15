@@ -162,7 +162,7 @@ Let's create an instance of Place and update it with an attribute called 'rooms'
 
 # Repo hierarchy
 Import output from tree when close to deadline
-.
+```
 ├── AUTHORS
 ├── console.py
 ├── file.json
@@ -193,6 +193,7 @@ Import output from tree when close to deadline
         ├── test_review.py
         ├── test_state.py
         └── test_user.py
+```
 
 # Authors
 Hemant Heer  
