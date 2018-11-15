@@ -6,7 +6,8 @@ import unittest
 from datetime import datetime
 from models.base_model import BaseModel
 from models import storage
-
+import pep8
+import os
 
 class TestBaseModel(unittest.TestCase):
     """ Test Case for BaseModel """
@@ -31,8 +32,24 @@ class TestBaseModel(unittest.TestCase):
     def teardown(self):
         """Tear down method"""
 
-        self.a.save()
-        self.b.save()
+        del self.a
+        del self.b
+        del self.old
+        del self.old_dict
+        del self.new_model
+
+        myfile = "/home/vagrant/AirBnB_clone/file.json"
+        try:
+            os.remove(myfile)
+        except FileNotFoundError:
+            pass
+
+    def test_pep8(self):
+        """pep8 format"""
+
+        pep8_style = pep8.StyleGuide(quiet=True)
+        result = pep8_style.check_files(['models/amenity.py'])
+        self.assertEqual(result.total_errors, 0, "Found code style errors.")
 
     def test_id_string(self):
         """Setup Method
@@ -208,6 +225,12 @@ class TestBaseModel(unittest.TestCase):
                 self.new.__dict__)
 
         self.assertEqual(correct_output_str, self.new.__str__())
+
+    def test_save(self):
+        """test save method"""
+
+        self.a.save()
+        self.assertNotEqual(self.a.created_at, self.a.updated_at)
 
 if __name__ == "__main__":
     unittest.main()
