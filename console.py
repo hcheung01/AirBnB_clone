@@ -439,6 +439,20 @@ class HBNBCommand(cmd.Cmd):
             string_id = norm_destroy.split(" ")[1]
             cls_name_with_id = clsName_func_list[0] + ' ' + string_id
             return self.do_destroy(cls_name_with_id)
+        elif "update" in clsName_func_list[1]:
+            full_update = clsName_func_list[1]
+            update_list = list(full_update)
+            for i in range(len(update_list)):
+                if update_list[i] in ('(', ')'):
+                    update_list[i] = " "
+                if update_list[i] == '"':
+                    update_list[i] = ""
+                if update_list[i] == ',':
+                    update_list[i] = ""
+            norm_update = ''.join(update_list)
+            update_remove = norm_update.split(' ')[1:]
+            cls_name_add = clsName_func_list[0] + ' ' + ' '.join(update_remove)
+            return self.do_update(cls_name_add)
 
 
 if __name__ == '__main__':
