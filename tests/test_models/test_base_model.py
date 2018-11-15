@@ -30,7 +30,7 @@ class TestBaseModel(unittest.TestCase):
         self.old_dict = self.old.to_dict()
         self.new_model = BaseModel(**self.old_dict)
 
-    def teardown(self):
+    def tearDown(self):
         """Tear down method"""
 
         del self.a
@@ -231,8 +231,6 @@ class TestBaseModel(unittest.TestCase):
 
         self.a.save()
         self.assertNotEqual(self.a.created_at, self.a.updated_at)
-        myfile = "/home/vagrant/AirBnB_clone/file.json"
-        self.assertEqual(os.remove(myfile), None)
 
 if __name__ == "__main__":
     unittest.main()

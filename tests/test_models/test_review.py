@@ -28,7 +28,7 @@ class TestReview(unittest.TestCase):
         self.a.text = "1000"
         self.b = Review()
 
-    def teardown(self):
+    def tearDown(self):
         """teardown method
 
         Args:
@@ -145,8 +145,6 @@ class TestReview(unittest.TestCase):
 
         self.b.save()
         self.assertNotEqual(self.b.created_at, self.b.updated_at)
-        myfile = "/home/vagrant/AirBnB_clone/file.json"
-        self.assertEqual(os.remove(myfile), None)
 
 if __name__ == "__main__":
     unittest.main()

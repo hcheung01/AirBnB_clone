@@ -33,7 +33,7 @@ class TestUser(unittest.TestCase):
         self.a.last_name = "Cheung"
         self.b = User()
 
-    def teardown(self):
+    def tearDown(self):
         """teardown method
 
         Args:
@@ -140,8 +140,6 @@ class TestUser(unittest.TestCase):
 
         self.b.save()
         self.assertNotEqual(self.b.created_at, self.b.updated_at)
-        myfile = "/home/vagrant/AirBnB_clone/file.json"
-        self.assertEqual(os.remove(myfile), None)
 
 if __name__ == "__main__":
     unittest.main()

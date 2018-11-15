@@ -37,7 +37,7 @@ class TestPlace(unittest.TestCase):
         self.a.amenity_ids = ["one", "two", "three"]
         self.b = Place()
 
-    def teardown(self):
+    def tearDown(self):
         """teardown method
 
         Args:
@@ -215,19 +215,11 @@ class TestPlace(unittest.TestCase):
 
         self.assertTrue(issubclass(Place, BaseModel))
 
-    def test_file_exist(self):
-        """test if file exist after delete"""
-
-        myfile = "/home/vagrant/AirBnB_clone/file.json"
-        self.assertTrue(os.path.isfile(myfile))
-
     def test_save(self):
         """test save"""
 
         self.b.save()
         self.assertNotEqual(self.b.created_at, self.b.updated_at)
-        myfile = "/home/vagrant/AirBnB_clone/file.json"
-        self.assertEqual(os.remove(myfile), None)
 
 if __name__ == "__main__":
     unittest.main()
