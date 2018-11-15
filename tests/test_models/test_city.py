@@ -39,15 +39,10 @@ class TestCity(unittest.TestCase):
         Return:
             na
         """
-        self.a.save()
         del self.a
         del self.b
-        myfile = "/home/vagrant/AirBnB_clone/file.json"
-        self.assertTrue(os.path.isfile(myfile))
         try:
-            os.path.isfile(myfile)
-            os.remove(myfile)
-            self.assertFalse(os.path.isfile(myfile))
+            os.remove("file.json")
         except FileNotFoundError:
             pass
 
