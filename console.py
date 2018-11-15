@@ -415,6 +415,18 @@ class HBNBCommand(cmd.Cmd):
                 if key.split('.')[0] == clsName_func_list[0]:
                     count += 1
             print(count)
+        elif "show" in clsName_func_list[1]:
+            full_show = clsName_func_list[1]
+            show_list = list(full_show)
+            for i in range(len(show_list)):
+                if show_list[i] in ('(', ')'):
+                    show_list[i] = " "
+                if show_list[i] == '"':
+                    show_list[i] = ""
+            norm_show = ''.join(show_list)
+            string_id = norm_show.split(" ")[1]
+            cls_name_with_id = clsName_func_list[0] + ' ' + string_id
+            return self.do_show(cls_name_with_id)
 
 
 if __name__ == '__main__':
