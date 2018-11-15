@@ -223,7 +223,15 @@ class TestPlace(unittest.TestCase):
     def test_file_exist(self):
         """test if file exist after delete"""
 
+        self.a.save()
         myfile = "/home/vagrant/AirBnB_clone/file.json"
+        self.assertTrue(os.path.isfile(myfile))
+        try:
+            os.path.isfile(myfile)
+            os.remove(myfile)
+            self.assertFalse(os.path.isfile(myfile))
+        except FileNotFoundError:
+            pass
         self.assertFalse(os.path.isfile(myfile))
 
 if __name__ == "__main__":
