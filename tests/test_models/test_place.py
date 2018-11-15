@@ -36,6 +36,8 @@ class TestPlace(unittest.TestCase):
         self.a.longitude = 8.5
         self.a.amenity_ids = ["one", "two", "three"]
         self.b = Place()
+        self.a.save()
+        self.b.save()
 
     def teardown(self):
         """teardown method
@@ -47,8 +49,6 @@ class TestPlace(unittest.TestCase):
         Return:
             na
         """
-        self.a.save()
-        self.b.save()
         del self.a
         del self.b
         myfile = "/home/vagrant/AirBnB_clone/file.json"
@@ -223,16 +223,8 @@ class TestPlace(unittest.TestCase):
     def test_file_exist(self):
         """test if file exist after delete"""
 
-        self.a.save()
         myfile = "/home/vagrant/AirBnB_clone/file.json"
         self.assertTrue(os.path.isfile(myfile))
-        try:
-            os.path.isfile(myfile)
-            os.remove(myfile)
-            self.assertFalse(os.path.isfile(myfile))
-        except FileNotFoundError:
-            pass
-        self.assertFalse(os.path.isfile(myfile))
 
 if __name__ == "__main__":
     unittest.main()

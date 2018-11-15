@@ -28,6 +28,12 @@ class TestBaseModel(unittest.TestCase):
         self.old_dict = self.old.to_dict()
         self.new_model = BaseModel(**self.old_dict)
 
+    def teardown(self):
+        """Tear down method"""
+
+        self.a.save()
+        self.b.save()
+
     def test_id_string(self):
         """Setup Method
 

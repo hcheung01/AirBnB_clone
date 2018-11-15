@@ -141,11 +141,5 @@ class TestAmenity(unittest.TestCase):
 
         self.assertTrue(issubclass(Amenity, BaseModel))
 
-    def test_file_exist(self):
-        """test if file exist after delete"""
-
-        myfile = "/home/vagrant/AirBnB_clone/file.json"
-        self.assertFalse(os.path.isfile(myfile))
-
 if __name__ == "__main__":
     unittest.main()
