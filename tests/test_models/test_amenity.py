@@ -26,8 +26,6 @@ class TestAmenity(unittest.TestCase):
         self.a = Amenity()
         self.a.name = "Hemant"
         self.b = Amenity()
-        self.a.save()
-        self.b.save()
 
     def teardown(self):
         """teardown method
@@ -39,6 +37,8 @@ class TestAmenity(unittest.TestCase):
         Return:
             na
         """
+        self.a.save()
+        self.b.save()
         del self.a
         del self.b
         myfile = "/home/vagrant/AirBnB_clone/file.json"
@@ -145,7 +145,7 @@ class TestAmenity(unittest.TestCase):
         """test if file exist after delete"""
 
         myfile = "/home/vagrant/AirBnB_clone/file.json"
-        self.assertTrue(os.path.isfile(myfile))
+        self.assertFalse(os.path.isfile(myfile))
 
 if __name__ == "__main__":
     unittest.main()
