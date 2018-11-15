@@ -144,7 +144,32 @@ Let's create an instance of Place and update it with an attribute called 'rooms'
 [Place] (333ef6ff-3ffd-4124-8349-940d43c89e72) {'id': '333ef6ff-3ffd-4124-8349-940d43c89e72', 'created_at': datetime.datetime(2018, 11, 15, 3, 39, 41, 148125), 'updated_at': datetime.datetime(2018, 11, 15, 3, 39, 41, 148149), 'rooms': '5'}
 ```
 
+### help
+If you have any questions on running certain commands and would like a complete description of the error handling, type in `help` in the console.
 
+```
+(hbnb) help
+
+Documented commands (type help <topic>):
+========================================
+EOF  all  create  destroy  help  quit  show  update
+```
+help will show you the documented commands
+
+```
+(hbnb) help all
+
+Print a list of instances(string representations) that match the class name. If a class name wasn't provided, it prints all instances in the json file
+
+Usage:
+Valid Class Names: ['BaseModel', 'User', 'Place', 'State', 'City', 'Amenity', 'Review']
+(hbnb) all......prints all instances in the json file
+(hbnb) all <valid class name>....prints instances of that class
+
+Common errors:
+** class doesn't exist **:  prints when an invalid class name was given to all
+```
+help <command> will also show you valid class names and the syntactical usage of the command.
 
 # Technical Requirements
 - All modules have documentation: can be verified with `python3 -c 'print(__import__("my_module").__doc__)'`
