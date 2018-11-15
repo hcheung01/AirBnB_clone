@@ -218,7 +218,6 @@ help <command> will also show you valid class names and the syntactical usage of
 - Individual tests can be run by specifying the full path to the file: e.g. `python3 -m unittest tests/test_models/test_base_model.py`
 
 # Repo hierarchy
-Import output from tree when close to deadline
 ```
 ├── AUTHORS
 ├── console.py
