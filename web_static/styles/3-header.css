@@ -1,0 +1,19 @@
+header {
+  background-color: white;
+  height: 70px;
+  width: 100%;
+  border-bottom: 1px solid #CCCCCC;
+  background-image: url("../images/logo.png");
+  background-repeat: no-repeat;
+  background-position: 20px 5px;
+  margin-bottom: 30px;
+}
+
+header div.logo {
+  width: 50%;
+  height: 100%;
+  margin-left: 20px;
+  margin-top: 8px;
+  background-image: url("../images/logo.png");
+  background-repeat: no-repeat;
+}
