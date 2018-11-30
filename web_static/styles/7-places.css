@@ -16,10 +16,16 @@
   padding-left: 20px;
 }
 
+
+
 @media screen and (max-width: 650px) {
   .places h1 {
     text-align: center;
-    font-size: 8vw;
+    font-size: 10vw;
+    margin: 0;
+  }
+   .places {
+    margin: 0;
   }
 }
 
@@ -28,6 +34,7 @@
     transform: scale(1.5);
   }
 }
+
 .place:hover {
   opacity: 0.5;
   transition: .25s;

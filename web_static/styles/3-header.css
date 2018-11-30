@@ -6,7 +6,6 @@ header {
   background-image: url("../images/logo.png");
   background-repeat: no-repeat;
   background-position: 20px 5px;
-  margin-bottom: 30px;
 }
 
 header div.logo {
@@ -16,4 +15,10 @@ header div.logo {
   margin-top: 8px;
   background-image: url("../images/logo.png");
   background-repeat: no-repeat;
+}
+
+@media screen and (min-width: 500px) {
+  header {
+    margin-bottom: 30px;
+  }
 }
