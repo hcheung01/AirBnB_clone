@@ -23,6 +23,7 @@
 ## Validation
 # All HTML/CSS files is validated using w3c_validator located in the same directory that check fors syntax or nesting errors
 
+```bash
 # Repo hierarchy
 ├── AIRBNB
 ├── AUTHORS
@@ -84,6 +85,6 @@
     └── w3c_validator.py
 
 8 directories, 50 files
-
+```
 # Authors
 Heindrick Cheung
