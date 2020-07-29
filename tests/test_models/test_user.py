@@ -28,7 +28,7 @@ class TestUser(unittest.TestCase):
 
         self.a = User()
         self.a.email = "Heindrick@gmail.com"
-        self.a.password = "Holberton"
+        self.a.password = "Coding"
         self.a.first_name = "Heiny"
         self.a.last_name = "Cheung"
         self.b = User()
@@ -88,7 +88,7 @@ class TestUser(unittest.TestCase):
         self.assertEqual(type(self.b.password), str)
         self.assertIsNotNone(self.a.password)
         self.assertIsNotNone(self.b.password)
-        self.assertEqual(self.a.password, "Holberton")
+        self.assertEqual(self.a.password, "Coding")
 
     def test_first_name(self):
         """Setup Method

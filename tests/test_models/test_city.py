@@ -25,7 +25,7 @@ class TestCity(unittest.TestCase):
         """
 
         self.a = City()
-        self.a.state_id = "1000Holberton"
+        self.a.state_id = "1000Coding"
         self.a.name = "Hemant"
         self.b = City()
 
@@ -98,7 +98,7 @@ class TestCity(unittest.TestCase):
         """
 
         self.assertNotEqual(self.a.state_id, "Heindrick")
-        self.assertEqual(self.a.state_id, "1000Holberton")
+        self.assertEqual(self.a.state_id, "1000Coding")
         self.assertEqual(self.b.state_id, "")
         self.assertEqual(type(self.a.state_id), str)
         self.assertEqual(type(self.b.state_id), str)
